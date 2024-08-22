@@ -5,6 +5,8 @@ VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ocean.Core.Data2JsonRender", "Ocean.Core.Data2JsonRender\Ocean.Core.Data2JsonRender.csproj", "{9AFAEDF8-5F26-4C3D-8312-DF147274522E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ocean.Core.xUnitTest", "Ocean.Core.xUnitTest\Ocean.Core.xUnitTest.csproj", "{DC026D50-9191-4C4D-9D9F-89817937082C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{9AFAEDF8-5F26-4C3D-8312-DF147274522E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9AFAEDF8-5F26-4C3D-8312-DF147274522E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9AFAEDF8-5F26-4C3D-8312-DF147274522E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC026D50-9191-4C4D-9D9F-89817937082C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC026D50-9191-4C4D-9D9F-89817937082C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC026D50-9191-4C4D-9D9F-89817937082C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC026D50-9191-4C4D-9D9F-89817937082C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
