@@ -56,7 +56,8 @@ namespace Ocean.Core.Data2JsonRender.Services
                 }
                 else if (property.FiledType == "Tree")
                 {
-                    obj[property.Name] = BuildTree(dataSet.Tables[tableIndex]);
+                    var prop = model.Where(m => m.ParentName == property.Name).ToList();
+                    obj[property.Name] = BuildTree(dataSet.Tables[tableIndex], prop);
                 }
                 else
                 {
@@ -77,7 +78,7 @@ namespace Ocean.Core.Data2JsonRender.Services
                 obj[property.Name] = property.FiledType == "int" ? Convert.ToInt32(value ?? 0) : value;
             }
         }
-        public List<JObject> BuildTree(DataTable table)
+        public List<JObject> BuildTree(DataTable table, List<ModelStructure> model)
         {
             var lookup = table.AsEnumerable().ToDictionary(
                 row => row["CompName"].ToString(),
@@ -93,21 +94,46 @@ namespace Ocean.Core.Data2JsonRender.Services
                 // ParentName herhangi bir CompName ile eşleşmiyorsa, bu en üst düğümdür
                 if (!lookup.ContainsKey(parentName))
                 {
-                    var rootNode = CreateNode(row, lookup);
+                    var rootNode = CreateNode(row, lookup, model);
                     result.Add(rootNode);
                 }
             }
 
             return result;
         }
+        public JObject BuildTreeFromDataTable(DataTable table, List<ModelStructure> model, string parentName)
+        {
+            var treeNodes = new JArray();
+            var treeFields = model.Where(m => m.ParentName == parentName).ToList();
+            foreach (var row in table.AsEnumerable())
+            {
+                var node = new JObject();
 
-        private JObject CreateNode(DataRow row, Dictionary<string, DataRow> lookup)
+                foreach (var field in treeFields)
+                {
+                    string columnName = field.TableField ?? field.Name;
+                    var value = row.Table.Columns.Contains(columnName) ? row[columnName] : null;
+                    node[field.Name] = JToken.FromObject(value);
+                }
+
+                treeNodes.Add(node);
+            }
+            return new JObject
+            {
+                ["Nodes"] = treeNodes
+            };
+        }
+
+
+        private JObject CreateNode(DataRow row, Dictionary<string, DataRow> lookup, List<ModelStructure> model)
         {
             var node = new JObject();
 
-            foreach (DataColumn col in row.Table.Columns)
+            foreach (DataColumn col in GetColumnsFromDataRow(row, model))
             {
-                node[col.ColumnName] = JToken.FromObject(row[col]);
+                var _model = model.Where(x => x.TableField == col.ColumnName).FirstOrDefault();
+                var _columnName = (_model != null ? _model.Name : col.ColumnName);
+                node[_columnName] = JToken.FromObject(row[col]);
             }
 
             var children = new JArray();
@@ -115,12 +141,21 @@ namespace Ocean.Core.Data2JsonRender.Services
 
             foreach (var childRow in lookup.Values.Where(r => r["ParentName"].ToString() == compName))
             {
-                var childNode = CreateNode(childRow, lookup);
+                var childNode = CreateNode(childRow, lookup, model);
                 children.Add(childNode);
             }
 
             node["Nodes"] = children;
             return node;
         }
+        private IEnumerable<DataColumn> GetColumnsFromDataRow(DataRow row, List<ModelStructure> model)
+        {
+            // LINQ sorgusu: ModelStructure'daki alanlara göre DataRow'daki DataColumn nesnelerini alın
+            var columns = row.Table.Columns.Cast<DataColumn>()
+                .Where(col => model.Any(m => (m.TableField ?? m.Name) == col.ColumnName));
+
+            return columns;
+        }
+
     }
 }

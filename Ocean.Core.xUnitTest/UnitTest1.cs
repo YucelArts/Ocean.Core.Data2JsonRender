@@ -147,7 +147,7 @@ namespace Ocean.Core.xUnitTest
         private DataSet dbDataSet()
         {
 
-            string query = "select * from  TmlEkranTANIM where BaseID='7'; select BaseID,MasterID,CompTip,CompName,CompText,ParentName from  TmlEkranTANIM_DET where MasterID='7'";
+            string query = "select * from  TmlEkranTANIM where BaseID='7'; select * from  TmlEkranTANIM_DET where MasterID='7'";
             DataSet dataSet = new DataSet();
 
             using (SqlConnection connection = new SqlConnection("Data Source=172.16.0.205\\dev12;Initial Catalog=dev_SetBaseVizyon;User ID=setuser;Password=atlas71;Trusted_Connection=False;TrustServerCertificate=True;"))
@@ -197,10 +197,19 @@ namespace Ocean.Core.xUnitTest
             var model = new List<ModelStructure>
         {
                    new ModelStructure { Name = "TmlEkranTANIM", FiledType = "Model", ParentName = "",Index = 0 },
-                   new ModelStructure { Name = "EkranADI", FiledType  = "string", ParentName = "TmlEkranTANIM", Index = 0, TableField="applicationCode" },
-                   new ModelStructure { Name = "TabloADI", FiledType = "string", ParentName = "TmlEkranTANIM", Index = 0,TableField="EkranADI" },
+                   new ModelStructure { Name = "EkranADI", FiledType  = "string", ParentName = "TmlEkranTANIM", Index = 0, TableField="EkranADI" },
+                   new ModelStructure { Name = "TabloADI", FiledType = "string", ParentName = "TmlEkranTANIM", Index = 0,TableField="TabloADI" },
                    new ModelStructure { Name = "password", FiledType  = "string", ParentName = "TmlEkranTANIM", Index = 0,TableField="TabloADI" },
                    new ModelStructure { Name = "SpADI", FiledType  = "string", ParentName = "TmlEkranTANIM", Index = 0 , TableField = "SpADI"},
+                   new ModelStructure { Name = "TmlEkranTANIM_DET", FiledType  = "Tree", ParentName = "TmlEkranTANIM",Index = 1 },
+                   new ModelStructure { Name = "BaseIDX", FiledType  = "string",ParentName = "TmlEkranTANIM_DET", TableField = "BaseID",Index = 1 },
+                   new ModelStructure { Name = "MasterID", FiledType  = "string",ParentName = "TmlEkranTANIM_DET", TableField = "MasterID",Index = 1 },
+                   new ModelStructure { Name = "CompTip", FiledType  = "string", ParentName = "TmlEkranTANIM_DET", TableField = "CompTip",Index = 1 },
+                   new ModelStructure { Name = "CompName", FiledType  = "string",ParentName = "TmlEkranTANIM_DET", TableField = "CompName",Index = 1 },
+                   new ModelStructure { Name = "CompText", FiledType  = "string", ParentName = "TmlEkranTANIM_DET",TableField = "CompText",Index = 1 },
+                   new ModelStructure { Name = "LocationX", FiledType  = "string", ParentName = "TmlEkranTANIM_DET",TableField = "LocationX",Index = 1 },
+                   
+
                    //new ModelStructure { Name = "ListeEkran_FL", FiledType  = "string", ParentName = "TmlEkranTANIM", Index = 0 , TableField = "ListeEkran_FL"},
                    //new ModelStructure { Name = "ParentModul", FiledType  = "string", ParentName = "TmlEkranTANIM", Index = 0 , TableField = "ParentModul"},
                    //new ModelStructure { Name = "SET2007", FiledType  = "string", ParentName = "TmlEkranTANIM", Index = 0 , TableField = "SET2007"},
@@ -260,13 +269,7 @@ namespace Ocean.Core.xUnitTest
 
 
 
-                   new ModelStructure { Name = "TmlEkranTANIM_DET", FiledType  = "Tree", ParentName = "TmlEkranTANIM",Index = 1 },
-                    new ModelStructure { Name = "BaseID", FiledType  = "string",ParentName = "TmlEkranTANIM_DET", TableField = "BaseID",Index = 1 },
-                    new ModelStructure { Name = "MasterID", FiledType  = "string",ParentName = "TmlEkranTANIM_DET", TableField = "MasterID",Index = 1 },
-                    new ModelStructure { Name = "CompTip", FiledType  = "string", ParentName = "TmlEkranTANIM_DET", TableField = "CompTip",Index = 1 },
-                    new ModelStructure { Name = "CompName", FiledType  = "string",ParentName = "TmlEkranTANIM_DET", TableField = "CompName",Index = 1 },
-                    new ModelStructure { Name = "CompText", FiledType  = "string", ParentName = "TmlEkranTANIM_DET",TableField = "CompText",Index = 1 },
-                    new ModelStructure { Name = "CompName", FiledType  = "Tree", ParentName = "TmlEkranTANIM_DET",Index = 1,TableField="ParentName" },
+
 
                     //new ModelStructure { Name = "CompName", FiledType  = "Tree", ParentName = "TmlEkranTANIM.",Index = 1,TableField="ParentName" },
 
@@ -283,6 +286,7 @@ namespace Ocean.Core.xUnitTest
 
 
         }
+
 
 
 
