@@ -150,7 +150,7 @@ namespace Ocean.Core.xUnitTest
             string query = "select * from  TmlEkranTANIM where BaseID='7'; select * from  TmlEkranTANIM_DET where MasterID='7'";
             DataSet dataSet = new DataSet();
 
-            using (SqlConnection connection = new SqlConnection("Data Source=172.16.0.205\\dev12;Initial Catalog=dev_SetBaseVizyon;User ID=setuser;Password=atlas71;Trusted_Connection=False;TrustServerCertificate=True;"))
+            using (SqlConnection connection = new SqlConnection("*"))
             {
                 connection.Open();
 
