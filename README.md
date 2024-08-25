@@ -51,6 +51,45 @@ First, let's have a Model and define propertyKeys in it.
 Second, let's have a Model again and have an Array in it.
 Inside the second model, let's have an Array that can pull data from a third DataTable.
 
+#### A DataSet with Multiple Tables 
+
+```c#
+
+       private DataSet MultipleDataSet()
+        {
+            DataSet dataSet = new DataSet();
+
+            DataTable table0 = new DataTable();
+            table0.Columns.Add("applicationCode", typeof(string));
+            table0.Columns.Add("username", typeof(string));
+            table0.Columns.Add("password", typeof(string));
+            table0.Columns.Add("languageCode", typeof(string));
+            table0.Columns.Add("correlationId", typeof(string));
+            table0.Columns.Add("timeOut", typeof(string));
+            table0.Rows.Add("TPORT", "TUSER", "123456", "2", new Guid().ToString(), "120");
+
+
+            DataTable table1 = new DataTable();
+            table1.Columns.Add("OrderRefNr", typeof(string));
+            table1.Columns.Add("VendorCode", typeof(string));
+            table1.Rows.Add("PO0000504", "BB201707154");
+
+            DataTable table2 = new DataTable();
+            table2.Columns.Add("odItemTreeID", typeof(string));
+            table2.Columns.Add("odPurchaseGroupCode", typeof(string));
+            table2.Columns.Add("odItemCategory", typeof(int));
+            table2.Rows.Add("01.004.100003", "01", 100003);
+            table2.Rows.Add("01.004.100011", "01", 100011);
+            table2.Rows.Add("08.010.100008", "08", 100008);
+
+            dataSet.Tables.Add(table0);
+            dataSet.Tables.Add(table1);
+            dataSet.Tables.Add(table2);
+            return dataSet;
+        }
+
+```
+
 ```json
 
 {
