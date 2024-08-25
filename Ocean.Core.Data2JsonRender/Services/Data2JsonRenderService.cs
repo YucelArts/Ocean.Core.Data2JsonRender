@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Ocean.Core.Data2JsonRender.Interfaces;
 using Ocean.Core.Data2JsonRender.Options;
 using System;
@@ -53,6 +54,10 @@ namespace Ocean.Core.Data2JsonRender.Services
 
                     obj[property.Name] = arrayItems;
                 }
+                else if (property.FiledType == "Tree")
+                {
+                    obj[property.Name] = BuildTree(dataSet.Tables[tableIndex]);
+                }
                 else
                 {
                     // TableField null ise, JSON anahtar değeri de null olur
@@ -71,6 +76,51 @@ namespace Ocean.Core.Data2JsonRender.Services
                 var value = property.TableField != null && row.Table.Columns.Contains(columnName) ? row[columnName] : null;
                 obj[property.Name] = property.FiledType == "int" ? Convert.ToInt32(value ?? 0) : value;
             }
+        }
+        public List<JObject> BuildTree(DataTable table)
+        {
+            var lookup = table.AsEnumerable().ToDictionary(
+                row => row["CompName"].ToString(),
+                row => row
+            );
+
+            var result = new List<JObject>();
+
+            foreach (var row in table.AsEnumerable())
+            {
+                var parentName = row["ParentName"].ToString();
+
+                // ParentName herhangi bir CompName ile eşleşmiyorsa, bu en üst düğümdür
+                if (!lookup.ContainsKey(parentName))
+                {
+                    var rootNode = CreateNode(row, lookup);
+                    result.Add(rootNode);
+                }
+            }
+
+            return result;
+        }
+
+        private JObject CreateNode(DataRow row, Dictionary<string, DataRow> lookup)
+        {
+            var node = new JObject();
+
+            foreach (DataColumn col in row.Table.Columns)
+            {
+                node[col.ColumnName] = JToken.FromObject(row[col]);
+            }
+
+            var children = new JArray();
+            var compName = row["CompName"].ToString();
+
+            foreach (var childRow in lookup.Values.Where(r => r["ParentName"].ToString() == compName))
+            {
+                var childNode = CreateNode(childRow, lookup);
+                children.Add(childNode);
+            }
+
+            node["Nodes"] = children;
+            return node;
         }
     }
 }
