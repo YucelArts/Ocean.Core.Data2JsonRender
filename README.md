@@ -3,7 +3,7 @@ Data2JsonRender:How to Dynamically Transform SQL Data into Rich JSON Formats
 
 ## JSON Result
 
-### Simple Query 
+### Single Query 
 
 Model Definition Example
 ![image](https://github.com/user-attachments/assets/3c63a4a3-2e4e-450f-bcc5-4d6211937f37)
@@ -39,8 +39,17 @@ Below you can see how to convert data in a Single DataTable to Rich Json type.
 
 ```
 
+### Multiple Table Query 
+
+
 ![image](https://github.com/user-attachments/assets/929a1545-799a-4f0e-a808-24c049dc7721)
 
+
+
+Let's complicate the example a bit.
+First, let's have a Model and define propertyKeys in it.
+Second, let's have a Model again and have an Array in it.
+Inside the second model, let's have an Array that can pull data from a third DataTable.
 
 ```json
 
