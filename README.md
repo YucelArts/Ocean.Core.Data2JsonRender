@@ -74,7 +74,23 @@ Below you can see how to convert data in a Single DataTable to Rich Json type.
 ### Multiple Table Query 
 
 
-![image](https://github.com/user-attachments/assets/929a1545-799a-4f0e-a808-24c049dc7721)
+| Name                | FiledType | ParentName    | TableField        | Index | DefaultValue |
+|---------------------|-----------|---------------|-------------------|-------|--------------|
+| requestHeader       | Model     | Model         |                   | 0     |              |
+| applicationCode     | string    | string        | applicationCode   | 0     |              |
+| username            | string    | string        | username          | 0     |              |
+| password            | string    | string        | password          | 0     |              |
+| languageCode        | string    | string        | languageCode      | 0     |              |
+| correlationId       | string    | string        | correlationId     | 0     |              |
+| timeOut             | string    | string        | timeOut           | 0     |              |
+| H_ProcOrder         | Model     | Model         |                   | 1     |              |
+| OrderRefNr          | string    | string        | OrderRefNr        | 1     |              |
+| VendorCode          | string    | string        | VendorCode        | 1     |              |
+| H_ProcOrderDet      | Array     | Array         |                   | 2     |              |
+| odItemTreeID        | string    | string        | odItemTreeID      | 2     |              |
+| odPurchaseGroupCode | string    | string        | odPurchaseGroup   | 2     |              |
+| odItemCategory      | int       | int           | odItemCategory    | 2     |              |
+
 
 #### A DataSet with Multiple Tables 
 
