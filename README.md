@@ -122,7 +122,7 @@ Inside the second model, let's have an Array that can pull data from a third Dat
 
 | Name                | FiledType | ParentName    | TableField        | Index | DefaultValue |
 |---------------------|-----------|---------------|-------------------|-------|--------------|
-| requestHeader       | Model     | Model         |                   | 0     |              |
+| requestHeader       | Model     |          |                   | 0     |              |
 | applicationCode     | string    | requestHeader        | applicationCode   | 0     |              |
 | username            | string    | requestHeader        | username          | 0     |              |
 | password            | string    | requestHeader        | password          | 0     |              |
