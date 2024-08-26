@@ -30,7 +30,15 @@ Data2JsonRender:How to Dynamically Transform SQL Data into Rich JSON Formats
 
 Model Definition Example
 
-![image](https://github.com/user-attachments/assets/3c63a4a3-2e4e-450f-bcc5-4d6211937f37)
+| Name                | FieldType | ParentName     | TableField          | Index | DefaultValue |
+|---------------------|-----------|----------------|---------------------|-------|--------------|
+| H_ProcOrder         | Model     |                |                     |       |              |
+| OrderRefNr          | string    | H_ProcOrder    | OrderRefNr          |       |              |
+| VendorCode          | string    | H_ProcOrder    | VendorCode          |       |              |
+| H_ProcOrderDet      | Array     | H_ProcOrder    |                     |       |              |
+| odItemTreeID        | string    | H_ProcOrderDet | odItemTreeID        |       |              |
+| odPurchaseGroupCode | string    | H_ProcOrderDet | odPurchaseGroupCode |       |              |
+| odItemCategory      | int       | H_ProcOrderDet | odItemCategory      |       |              |
 
 ###
 
