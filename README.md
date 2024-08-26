@@ -123,19 +123,19 @@ Inside the second model, let's have an Array that can pull data from a third Dat
 | Name                | FiledType | ParentName    | TableField        | Index | DefaultValue |
 |---------------------|-----------|---------------|-------------------|-------|--------------|
 | requestHeader       | Model     | Model         |                   | 0     |              |
-| applicationCode     | string    | string        | applicationCode   | 0     |              |
-| username            | string    | string        | username          | 0     |              |
-| password            | string    | string        | password          | 0     |              |
-| languageCode        | string    | string        | languageCode      | 0     |              |
-| correlationId       | string    | string        | correlationId     | 0     |              |
-| timeOut             | string    | string        | timeOut           | 0     |              |
-| H_ProcOrder         | Model     | Model         |                   | 1     |              |
-| OrderRefNr          | string    | string        | OrderRefNr        | 1     |              |
-| VendorCode          | string    | string        | VendorCode        | 1     |              |
-| H_ProcOrderDet      | Array     | Array         |                   | 2     |              |
-| odItemTreeID        | string    | string        | odItemTreeID      | 2     |              |
-| odPurchaseGroupCode | string    | string        | odPurchaseGroup   | 2     |              |
-| odItemCategory      | int       | int           | odItemCategory    | 2     |              |
+| applicationCode     | string    | requestHeader        | applicationCode   | 0     |              |
+| username            | string    | requestHeader        | username          | 0     |              |
+| password            | string    | requestHeader        | password          | 0     |              |
+| languageCode        | string    | requestHeader        | languageCode      | 0     |              |
+| correlationId       | string    | requestHeader        | correlationId     | 0     |              |
+| timeOut             | string    | requestHeader        | timeOut           | 0     |              |
+| H_ProcOrder         | Model     |          |                   | 1     |              |
+| OrderRefNr          | string    | H_ProcOrder        | OrderRefNr        | 1     |              |
+| VendorCode          | string    | H_ProcOrder        | VendorCode        | 1     |              |
+| H_ProcOrderDet      | Array     | H_ProcOrder         |                   | 2     |              |
+| odItemTreeID        | string    | H_ProcOrderDet        | odItemTreeID      | 2     |              |
+| odPurchaseGroupCode | string    | H_ProcOrderDet        | odPurchaseGroup   | 2     |              |
+| odItemCategory      | int       | H_ProcOrderDet           | odItemCategory    | 2     |              |
 
 
 
